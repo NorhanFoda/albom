@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [LoginController::class, 'getLoginFrom'])->name('get-login-form');
+
+Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function(){
+    
+    Route::resource('users', UserController::class)->except(['create', 'store']);
+    
 });
