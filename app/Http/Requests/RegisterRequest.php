@@ -23,10 +23,34 @@ class RegisterRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6|confirmed'
-        ];
+        switch($this->method())
+        {
+            case 'GET':
+            case 'DELETE':
+            {
+                return [];
+            }
+            case 'POST':
+            {
+                return [
+                    'name' => 'required',
+                    'email' => 'required|email|unique:users,email',
+                    'password' => 'required|min:6|confirmed'
+                ];
+            }
+            case 'PUT':
+            case 'PATCH':
+            {
+
+                return [
+                    'name' => 'required',
+                    'email' => 'required|email|unique:users,email,'.auth()->user()->id,
+                    'password' => 'nullable|min:6|confirmed'
+                ];
+
+            }
+            default:break;
+
+        }
     }
 }

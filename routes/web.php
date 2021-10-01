@@ -55,6 +55,7 @@ Route::name('web.')->namespace('Web')->group(function(){
         Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
         Route::get('profile', [ProfileController::class, 'index'])->name('profile');
+        Route::put('profile', [ProfileController::class, 'updateProfile'])->name('update-profile');
     });
 });
 
