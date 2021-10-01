@@ -19,6 +19,7 @@ class RoleSeeder extends Seeder
 
         // Admin
         $admin = $roleRepository->create(['name' => 'admin']);
+        $user = $roleRepository->create(['name' => 'user']);
 
 
         // Users management role and permissions

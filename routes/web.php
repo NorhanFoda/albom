@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Admin\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,10 +15,31 @@ use App\Http\Controllers\Auth\LoginController;
 |
 */
 
-Route::get('/', [LoginController::class, 'getLoginFrom'])->name('get-login-form');
+/** 
+ * Login routes 
+ * */
+Route::middleware('guest')->group(function(){
 
+    Route::get('/login', [LoginController::class, 'getLoginFrom'])->name('get-login-form');
+    Route::post('/login', [LoginController::class, 'login'])->name('login');
+
+});
+
+/**
+ * Admin routes
+ */
 Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function(){
     
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+
     Route::resource('users', UserController::class)->except(['create', 'store']);
     
 });
+
+/**
+ * Website
+ */
+Route::get('/', function(){
+    dd('jjvnjnjnnnnnnnnnnnnnnnnnnnnnnnnn');
+})->name('web.home');
+
