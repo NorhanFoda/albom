@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
     {
         $userRepository = App::make('App\Repositories\UserRepositoryInterface');
 
-        $user = $userRepository->create(
+        $admin = $userRepository->create(
             [
                 'name' => 'Admin',
                 'email' => 'admin@demo.com',
@@ -24,6 +24,16 @@ class UserSeeder extends Seeder
             ],
         );
 
-        $user->assignRole('admin');
+        $admin->assignRole('admin');
+
+        $user = $userRepository->create(
+            [
+                'name' => 'User',
+                'email' => 'user@demo.com',
+                'password' => bcrypt('123456')
+            ],
+        );
+
+        $user->assignRole('user');
     }
 }

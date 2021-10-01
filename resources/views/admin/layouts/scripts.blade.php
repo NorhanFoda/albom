@@ -14,10 +14,6 @@
  <script src="{{ asset('dashboard/app-assets/js/scripts/components.js') }}"></script>
  <!-- END: Theme JS-->
 
- <!-- BEGIN: Page JS-->
- <script src="{{ asset('dashboard/app-assets/js/scripts/pages/dashboard-analytics.js') }}"></script>
- <!-- END: Page JS-->
-
  <!-- BEGIN: SweetAlert -->
 <script type="text/javascript"
 src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.all.min.js"></script>

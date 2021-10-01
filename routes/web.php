@@ -2,7 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Web\AlbomController;
+use App\Http\Controllers\Web\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,12 +19,15 @@ use App\Http\Controllers\Admin\HomeController;
 */
 
 /** 
- * Login routes 
+ * Admin auth routes 
  * */
 Route::middleware('guest')->group(function(){
 
-    Route::get('/login', [LoginController::class, 'getLoginFrom'])->name('get-login-form');
-    Route::post('/login', [LoginController::class, 'login'])->name('login');
+    Route::get('login', [LoginController::class, 'getLoginFrom'])->name('get-login-form');
+    Route::post('login', [LoginController::class, 'login'])->name('login');
+
+    Route::get('singup', [RegisterController::class, 'getRegisterForm'])->name('get-register-form');
+    Route::post('singup', [RegisterController::class, 'regsiter'])->name('register');
 
 });
 
@@ -36,10 +42,27 @@ Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function(){
     
 });
 
+
 /**
  * Website
  */
-Route::get('/', function(){
-    dd('jjvnjnjnnnnnnnnnnnnnnnnnnnnnnnnn');
-})->name('web.home');
+Route::name('web.')->namespace('Web')->group(function(){
+
+    Route::get('/', [AlbomController::class, 'index'])->name('home');
+
+    Route::middleware('auth')->group(function(){
+
+        Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+
+        Route::get('profile', [ProfileController::class, 'index'])->name('profile');
+    });
+});
+
+/**
+ * users CRUD
+ * alboms CRUD
+ * roles CRUD
+ * website
+ * settings
+ */
 

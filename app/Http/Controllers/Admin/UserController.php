@@ -25,7 +25,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $data['users'] = $this->userRepository->paginate();
+        $data['users'] = $this->userRepository->paginateWhereHas('roles', [['name', 'user']]);
 
         return view('admin.users.index')->with([
             'data' => $data
@@ -71,18 +71,29 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, $id)
     {
-        $data = $request->except(['_token', '_method']);
+        $data = $request->except(['_token', '_method', 'edit']);
 
         $updated = $this->userRepository->update($data, $id);
 
         if($updated){
 
-            return redirect()->back()->with('success', 'User data updated successfully');
+            $response['status'] = 1;
+            $response['empty_inputs'] = ['email', 'password'];
+            $response['reload'] = 1;
+            $response['redirect'] = route('admin.users.edit', $id);
+            return $response;
+
         }
         else{
+            
+            $response['status'] = 0;
+            $response['empty_inputs'] = ['email', 'password'];
+            $response['reload'] = 0;
+            $response['redirect'] = route('admin.users.edit', $id);
+            return $response;
 
-            return redirect()->back()->with('error', 'A problem detected, please try again later');
         }
+        
     }
 
     /**

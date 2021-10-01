@@ -26,7 +26,6 @@ $(document).ready(function(){
                         showConfirmButton: false,
                     });
 
-                    console.log( response.redirect);
                     window.location.href = response.redirect;
                 }
                 else{
@@ -40,11 +39,11 @@ $(document).ready(function(){
                 }
 
                 // check for reload
-                if(response.reload && response.reload == 1){
-                    setTimeout(function (){
-                        location.reload();
-                    }, 1500);
-                }
+                // if(response.reload && response.reload == 1){
+                //     setTimeout(function (){
+                //         location.reload();
+                //     }, 1500);
+                // }
 
             },
             error: function (errors) {

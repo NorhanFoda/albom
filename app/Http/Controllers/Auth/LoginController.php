@@ -22,7 +22,8 @@ class LoginController extends Controller
 
     public function getLoginFrom(){
 
-        return view('admin.auth.login');
+        // return view('admin.auth.login');
+        return view('web.auth.login');
     }
 
     public function login(LoginRequest $request){
@@ -44,17 +45,25 @@ class LoginController extends Controller
 
             $response['status'] = 1;
             $response['empty_inputs'] = ['email', 'password'];
-            $response['reload'] = 1;
             $response['redirect'] = $redirect;
+            $response['reload'] = 1;
             return $response;
 
         }
 
+        $redirect = route('get-login-form');
         $response['status'] = 0;
         $response['empty_inputs'] = ['email', 'password'];
-        $response['reload'] = 0;
-        $response['redirect'] = '';
+        $response['redirect'] = $redirect;
+        $response['reload'] = 0;    
         return $response;
 
+    }
+
+    public function logout(){
+
+        Auth::logout();
+
+        return redirect()->route('web.home');
     }
 }

@@ -18,7 +18,7 @@ $(document).ready(function(){
             contentType: false,
             processData: false,
             success: function (response) {
-                console.log(response);
+                console.log(response, edit);
                 if(response.status == 1 && edit == "true"){
                     Swal.fire({
                         title: "Updated successfully",
