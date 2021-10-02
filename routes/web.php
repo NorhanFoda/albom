@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+
 use App\Http\Controllers\Admin\HomeController;
+
 use App\Http\Controllers\Web\WebHomeController;
 use App\Http\Controllers\Web\ProfileController;
 
@@ -39,6 +41,10 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->name
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
     Route::resource('users', UserController::class)->except(['create', 'store']);
+
+    Route::get('view-albom/{id}', [App\Http\Controllers\Admin\UserController::class, 'viewAlbom'])->name('view-albom');
+    Route::delete('delete-albom/{id}', [App\Http\Controllers\Admin\UserController::class, 'deleteAlbom'])->name('delete-albom');
+    Route::delete('delete-image/{id}', [App\Http\Controllers\Admin\UserController::class, 'deleteImage'])->name('delete-image');
     
 });
 

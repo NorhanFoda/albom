@@ -8,20 +8,32 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Admin\UserRequest;
 
 use App\Repositories\UserRepositoryInterface;
+use App\Repositories\AlbomRepositoryInterface;
+use App\Repositories\ImageRepositoryInterface;
+
+use Storage;
 
 class UserController extends Controller
 {
     private $userRepository;
+    private $albomRepository;
+    private $imageRepository;
 
-    public function __construct(UserRepositoryInterface $userRepository){
+    public function __construct(UserRepositoryInterface $userRepository,
+                                AlbomRepositoryInterface $albomRepository,
+                                ImageRepositoryInterface $imageRepository){
 
         $this->userRepository = $userRepository;
+        $this->albomRepository = $albomRepository;
+        $this->imageRepository = $imageRepository;
 
         $this->middleware('can:list_users',    ['only' => ['index']]);
-        $this->middleware('can:create_users',    ['only' => ['create', 'store']]);
         $this->middleware('can:edit_users',    ['only' => ['edit', 'update']]);
         $this->middleware('can:show_users',    ['only' => ['show']]);
         $this->middleware('can:delete_users',    ['only' => ['delete']]);
+        $this->middleware('can:show_alboms',    ['only' => ['viewAlbom']]);
+        $this->middleware('can:delete_alboms',    ['only' => ['deleteAlbom']]);
+        $this->middleware('can:delete_images',    ['only' => ['deleteImage']]);
     }
 
     /**
@@ -46,7 +58,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $data['user'] = $this->userRepository->findOne($id);
+        $data['user'] = $this->userRepository->findWith($id, ['alboms']);
 
         return view('admin.users.show')->with([
             'data' => $data
@@ -109,5 +121,45 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function viewAlbom($id){
+
+        $data['albom'] = $this->albomRepository->findWith($id, ['images']);
+
+        return view('admin.alboms.show')->with([
+            'data' => $data
+        ]);
+    }
+
+    public function deleteAlbom($id){
+
+        $albom =  $this->albomRepository->findWith($id, ['images']);
+
+        Storage::delete($albom->main_image);
+
+        foreach($albom->images as $image){
+
+            Storage::delete($image->path);
+        }
+
+        $this->albomRepository->delete($id);
+
+        return response()->json([
+            'data' => 1
+        ], 200);
+    }
+
+    public function deleteImage($id){
+
+        $image =  $this->imageRepository->findOne($id);
+
+        Storage::delete($image->path);
+
+        $this->imageRepository->delete($id);
+
+        return response()->json([
+            'data' => 1
+        ], 200);
     }
 }

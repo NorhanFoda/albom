@@ -56,6 +56,7 @@ $(document).ready(function(){
 
                 $(this).closest('tr').remove();
                 $(this).closest('.col-md-4').remove();
+                $(this).closest('.col-lg-4').remove();
             } else if (
                 /* Read more about handling dismissals below */
                 result.dismiss === Swal.DismissReason.cancel
