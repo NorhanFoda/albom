@@ -15,8 +15,13 @@
             <li class=" nav-item {{ areActiveRoutes(['admin.home']) }}"><a href="{{ route('admin.home') }}"><i class="feather icon-home"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span></a>
             </li>
 
-            @if(checkPermissions(['list_users', 'create_user', 'edit_user', 'show_user', 'delete_user']))
+            @if(checkPermissions(['list users', 'edit users', 'show users', 'delete users']))
                 <li class="{{ areActiveRoutes(['admin.users.index', 'admin.users.edit', 'admin.users.update']) }}"><a href="{{ route('admin.users.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Users">Users</span></a>
+                </li>
+            @endif
+
+            @if(checkPermissions(['list roles', 'create roles', 'edit roles', 'show roles', 'delete roles']))
+                <li class="{{ areActiveRoutes(['admin.roles.index', 'admin.roles.edit', 'admin.roles.update']) }}"><a href="{{ route('admin.roles.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Users">Roles</span></a>
                 </li>
             @endif
 

@@ -46,7 +46,7 @@
                                 </table>
                             </div>
                             
-                            @can('edit_users')
+                            @can('edit users')
                                 <div class="col-12">
                                     <a href="{{ route('admin.users.edit', $data['user']->id) }}" class="btn btn-primary mr-1"><i class="feather icon-edit-1"></i> Edit</a>
                                 </div>
@@ -60,13 +60,13 @@
         </div>
 
          <!-- alboms start -->
-        @can('list_alboms')
+        @can('list alboms')
             <div class="row">
                 @forelse ($data['user']->alboms as $albom)
                     <div class="col-lg-4 col-md-1 col-sm-1 col-xs-1">
                         <div class="card ecommerce-card">
                             <div class="card-content">
-                                @can('show_alboms')
+                                @can('show alboms')
                                     <div class="item-img text-center">
                                         <a href="{{ route('admin.view-albom', $albom->id) }}">
                                             <img src="{{ asset('storage/'.$albom->main_image) }}" class="img-fluid" alt="img-placeholder">
@@ -79,7 +79,7 @@
                                             <h3>{{$albom->title}} - {{ $albom->type }}</h3>
                                         </a>
 
-                                        @can('delete_alboms')
+                                        @can('delete alboms')
                                             <a href="#" class="remove-table btn btn-danger" data-action="{{ route('admin.delete-albom', $albom->id) }}" style="display: inline-block; float:right">
                                                 <span class="action-delete"><i class="feather icon-trash"></i></span>
                                             </a>

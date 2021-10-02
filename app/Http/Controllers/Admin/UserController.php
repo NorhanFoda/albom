@@ -27,13 +27,13 @@ class UserController extends Controller
         $this->albomRepository = $albomRepository;
         $this->imageRepository = $imageRepository;
 
-        $this->middleware('can:list_users',    ['only' => ['index']]);
-        $this->middleware('can:edit_users',    ['only' => ['edit', 'update']]);
-        $this->middleware('can:show_users',    ['only' => ['show']]);
-        $this->middleware('can:delete_users',    ['only' => ['delete']]);
-        $this->middleware('can:show_alboms',    ['only' => ['viewAlbom']]);
-        $this->middleware('can:delete_alboms',    ['only' => ['deleteAlbom']]);
-        $this->middleware('can:delete_images',    ['only' => ['deleteImage']]);
+        $this->middleware('can:list users',    ['only' => ['index']]);
+        $this->middleware('can:edit users',    ['only' => ['edit', 'update']]);
+        $this->middleware('can:show users',    ['only' => ['show']]);
+        $this->middleware('can:delete users',    ['only' => ['delete']]);
+        $this->middleware('can:show alboms',    ['only' => ['viewAlbom']]);
+        $this->middleware('can:delete alboms',    ['only' => ['deleteAlbom']]);
+        $this->middleware('can:delete images',    ['only' => ['deleteImage']]);
     }
 
     /**

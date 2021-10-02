@@ -38,14 +38,20 @@ Route::middleware('guest')->group(function(){
  */
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->namespace('Admin')->group(function(){
     
+    // hoe route
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
+    // Users and alboms routes
     Route::resource('users', UserController::class)->except(['create', 'store']);
-
     Route::get('view-albom/{id}', [App\Http\Controllers\Admin\UserController::class, 'viewAlbom'])->name('view-albom');
     Route::delete('delete-albom/{id}', [App\Http\Controllers\Admin\UserController::class, 'deleteAlbom'])->name('delete-albom');
     Route::delete('delete-image/{id}', [App\Http\Controllers\Admin\UserController::class, 'deleteImage'])->name('delete-image');
-    
+
+    // Employees routes
+    Route::resource('empoyees', EmployeeController::class)->except(['show']);
+
+    // Roles routes
+    Route::resource('roles', RoleController::class);
 });
 
 

@@ -31,7 +31,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Simple Form Validation</h4>
+                    <h4 class="card-title">Edit user data</h4>
                 </div>
                 <div class="card-content">
                     <div class="card-body">

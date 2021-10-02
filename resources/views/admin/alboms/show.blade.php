@@ -28,14 +28,14 @@
                 <div class="col-lg-4 col-md-1 col-sm-1 col-xs-1">
                     <div class="card ecommerce-card">
                         <div class="card-content">
-                            @can('show_alboms')
+                            @can('show alboms')
                                 <div class="item-img text-center">
                                     <img src="{{ asset('storage/'.$image->path) }}" class="img-fluid" alt="img-placeholder">
                                 </div>
                             @endcan
                             <div class="card-body">
                                 <div class="item-name">
-                                    @can('delete_images')
+                                    @can('delete images')
                                         <a href="#" class="remove-table btn btn-danger" data-action="{{ route('admin.delete-image', $image->id) }}" style="display: inline-block; float:right">
                                             <span class="action-delete"><i class="feather icon-trash"></i></span>
                                         </a>
