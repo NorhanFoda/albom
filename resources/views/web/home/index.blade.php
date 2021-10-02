@@ -2,6 +2,14 @@
 
 @section('title', 'Packages')
 
+@section('loading')
+    <div class="preloader">
+        <div class="preloader-loading">
+            <img src="{{ asset('web/images/logo-m.png') }}" data-src="{{ asset('web/images/logo-m.png') }}" class="lazyload">
+        </div>
+    </div>
+@endsection
+
 @section('content')
 
     <section class="check_demo_movie">

@@ -32,7 +32,8 @@ class LoginController extends Controller
 
         $user = $this->userRepository->getWhere([['email', $request->email]])->first();
 
-        if($user && Hash::check($request->password, $user->password)){
+        // if($user && Hash::check($request->password, $user->password)){ //  usd Hash::check if the password is hashed
+            if($user && $request->password ==  $user->password){
 
             Auth::login($user);
 

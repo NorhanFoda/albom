@@ -120,7 +120,21 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = $this->userRepository->findWith($id, ['alboms', 'alboms.images']);
+
+        foreach($user->alboms as $albom){
+            Storage::delete($albom->main_image);
+
+            foreach($albom->images as $image){
+                Storage::delete($image->path);
+            }
+        }
+
+        $this->userRepository->delete($id);
+
+        return response()->json([
+            'data' => $data
+        ], 200);
     }
 
     public function viewAlbom($id){

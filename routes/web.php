@@ -36,7 +36,8 @@ Route::middleware('guest')->group(function(){
 /**
  * Admin routes
  */
-Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->namespace('Admin')->group(function(){
+Route::middleware(['auth', 'role:admin|employee'])->prefix('admin')->name('admin.')->namespace('Admin')->group(function(){
+    // Route::middleware(['auth'])->prefix('admin')->name('admin.')->namespace('Admin')->group(function(){
     
     // hoe route
     Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -48,7 +49,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->name
     Route::delete('delete-image/{id}', [App\Http\Controllers\Admin\UserController::class, 'deleteImage'])->name('delete-image');
 
     // Employees routes
-    Route::resource('empoyees', EmployeeController::class)->except(['show']);
+    Route::resource('employees', EmployeeController::class)->except(['show']);
 
     // Roles routes
     Route::resource('roles', RoleController::class);

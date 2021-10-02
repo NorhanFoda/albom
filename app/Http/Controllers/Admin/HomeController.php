@@ -26,7 +26,7 @@ class HomeController extends Controller
 
     public function index(){
 
-        $data['users_count'] =  $this->userRepository->getAll()->count();
+        $data['users_count'] =  $this->userRepository->whereHas('roles', [['name', 'user']])->count();
         $data['images_count'] =  $this->imageRepository->getAll()->count();
         $data['alboms_count'] =  $this->albomRepository->getAll()->count();
 

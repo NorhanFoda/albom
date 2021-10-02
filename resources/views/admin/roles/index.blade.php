@@ -27,7 +27,9 @@
 
         <!-- DataTable starts -->
         <div class="table-responsive">
-            <a href="{{ route('admin.roles.create') }}" class="btn btn-primary">Add role</a>
+            @can('create roles')
+                <a href="{{ route('admin.roles.create') }}" class="btn btn-primary">Add role</a>
+            @endcan
             <table class="table data-list-view">
                 <thead>
                     <tr>
@@ -43,15 +45,23 @@
                             <td></td>
                             <td class="product-name">{{ $role->name }}</td>
                             <td class="product-action">
-                                <a href="{{ route('admin.roles.edit', $role->id) }}">
-                                    <span class="action-edit"><i class="feather icon-edit"></i></span>
-                                </a>
-                                <a href="{{ route('admin.roles.show', $role->id) }}">
-                                    <span class="action-show"><i class="feather icon-eye"></i></span>
-                                </a>
-                                <a href="#" class="remove-table" data-action="{{ route('admin.roles.destroy', $role->id) }}">
-                                    <span class="action-delete"><i class="feather icon-trash"></i></span>
-                                </a>
+                                @can('edit roles')
+                                    <a href="{{ route('admin.roles.edit', $role->id) }}">
+                                        <span class="action-edit"><i class="feather icon-edit"></i></span>
+                                    </a>
+                                @endcan
+
+                                @can('show roles')
+                                    <a href="{{ route('admin.roles.show', $role->id) }}">
+                                        <span class="action-show"><i class="feather icon-eye"></i></span>
+                                    </a>    
+                                @endcan
+                                
+                                @can('delete roles')
+                                    <a href="#" class="remove-table" data-action="{{ route('admin.roles.destroy', $role->id) }}">
+                                        <span class="action-delete"><i class="feather icon-trash"></i></span>
+                                    </a>    
+                                @endcan
                             </td>
                         </tr>
                     @empty

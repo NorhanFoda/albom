@@ -25,6 +25,11 @@
                 </li>
             @endif
 
+            @if(checkPermissions(['list employees', 'create employees', 'edit employees', 'show employees', 'delete employees']))
+                <li class="{{ areActiveRoutes(['admin.employees.index', 'admin.employees.edit', 'admin.employees.update']) }}"><a href="{{ route('admin.employees.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Users">Employees</span></a>
+                </li>
+            @endif
+
             
         </ul>
     </div>

@@ -29,7 +29,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $data['roles'] = $this->roleRepository->paginateWhere([['name', '!=', 'admin'], ['name', '!=', 'user']]);
+        $data['roles'] = $this->roleRepository->paginateWhere([['name', '!=', 'admin'], ['name', '!=', 'user'], ['name', '!=', 'employee']]);
 
         return view('admin.roles.index')->with([
             'data' => $data

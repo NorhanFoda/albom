@@ -19,6 +19,7 @@ class RoleSeeder extends Seeder
 
         // Admin
         $admin = $roleRepository->create(['name' => 'admin']);
+        $employee = $roleRepository->create(['name' => 'employee']);
         $user = $roleRepository->create(['name' => 'user']);
 
 
