@@ -183,12 +183,12 @@ abstract class BaseRepository implements BaseRepositoryInterface
      * @params OPTIONAL $orderBy with the column name && dir
      * @params $data =>array of the relational models to be retrieved
      */
-    public function paginateWhereWith(array $data, array $with, $orderBy = ['column' => 'id', 'dir' => 'DESC'], $limit = 10)
+    public function paginateWhereWith(array $data, array $with, $limit = 10, $orderBy = ['column' => 'id', 'dir' => 'DESC'])
     {
         return $this->model->with($with)->where($data)->orderBy($orderBy['column'], $orderBy['dir'])->paginate($limit);
     }
 
-    public function paginateWhere(array $data, $orderBy = ['column' => 'id', 'dir' => 'DESC'], $limit = 10)
+    public function paginateWhere(array $data, $limit = 10, $orderBy = ['column' => 'id', 'dir' => 'DESC'])
     {
         return $this->model->where($data)->orderBy($orderBy['column'], $orderBy['dir'])->paginate($limit);
     }

@@ -1,17 +1,15 @@
 @extends('web.layouts.app')
 
-@section('title', 'Packages')
+@section('title', 'Albom')
 
 @section('content')
 
     <section class="check_demo_movie">
         <div class="container">
-            <h2 class=" wow fadeInDown">Check Our <span class="main-color"> Packages</span></h2>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
-                and scrambled it to make a type specimen book.</p>
+            <h2 class=" wow fadeInDown">Your Alboms</h2>
+            <p><a href="{{ route('web.alboms.create') }}"><i class="fa fa-plus"></i>Add new albom</a></p>
             <div class="row">
-                
+
                 @forelse ($data['alboms'] as $albom)
 
                     <div class="col-md-4">
@@ -23,11 +21,8 @@
                                 <h4> <a href="{{ route('web.alboms.show', $albom->id) }}">{{ $albom->title }}</a></h4>
                                 <div class="rating">
                                     <ul class="d-flex justify-content-center rating_stars">
-                                        <li><i class="fas fa-star star_gold"></i></li>
-                                        <li><i class="fas fa-star star_gold"></i></li>
-                                        <li><i class="fas fa-star star_gold"></i></li>
-                                        <li><i class="fas fa-star star_gold"></i></li>
-                                        <li><i class="fas fa-star star_gold"></i></li>
+                                        <li><a href="{{ route('web.alboms.edit', $albom->id) }}"><i class="fa fa-edit"></i></a></li>
+                                        <li><a href="#" class="remove-table" data-action="{{ route('web.alboms.destroy', $albom->id) }}"><i class="fa fa-trash"></i></a></li>
                                     </ul>
                                 </div>
                                 <p class="package-price">
@@ -47,11 +42,14 @@
                         </div>
                     </div>
                 @endforelse
-
             </div>
-
-            {{ $data['alboms']->links() }}
+                {{ $data['alboms']->links() }}
         </div>
     </section>
-
 @endsection
+
+@push('js')
+    <!-- BEGIN: Page JS-->
+    <script src="{{ asset('dashboard/backend/shared/delete-item.js') }}"></script>
+    <!-- END: Page JS-->
+@endpush

@@ -16,6 +16,12 @@ class UserController extends Controller
     public function __construct(UserRepositoryInterface $userRepository){
 
         $this->userRepository = $userRepository;
+
+        $this->middleware('can:list_users',    ['only' => ['index']]);
+        $this->middleware('can:create_users',    ['only' => ['create', 'store']]);
+        $this->middleware('can:edit_users',    ['only' => ['edit', 'update']]);
+        $this->middleware('can:show_users',    ['only' => ['show']]);
+        $this->middleware('can:delete_users',    ['only' => ['delete']]);
     }
 
     /**
@@ -78,7 +84,6 @@ class UserController extends Controller
         if($updated){
 
             $response['status'] = 1;
-            $response['empty_inputs'] = ['email', 'password'];
             $response['reload'] = 1;
             $response['redirect'] = route('admin.users.edit', $id);
             return $response;
@@ -87,7 +92,6 @@ class UserController extends Controller
         else{
             
             $response['status'] = 0;
-            $response['empty_inputs'] = ['email', 'password'];
             $response['reload'] = 0;
             $response['redirect'] = route('admin.users.edit', $id);
             return $response;

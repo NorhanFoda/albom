@@ -5,6 +5,7 @@
 @push('css')
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/app-assets/css/plugins/forms/validation/form-validation.css') }}">
 @endpush
+
 @section('content')
     <section class="contact-us bg-light">
         <div class="container">

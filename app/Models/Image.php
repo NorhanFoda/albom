@@ -13,4 +13,8 @@ class Image extends Model
         'path',
         'albom_id'
     ];
+
+    public function albom(){
+        return $this->belongsTo(Albom::class);
+    }
 }

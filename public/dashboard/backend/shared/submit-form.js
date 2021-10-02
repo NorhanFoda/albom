@@ -10,6 +10,7 @@ $(document).ready(function(){
         var formData = new FormData($(this)[0]),
             action = $(this).attr('action'),
             method = $(this).attr('method');
+
         // make the ajax request
         $.ajax({
             url: action,
@@ -27,6 +28,8 @@ $(document).ready(function(){
                         showCancelButton: false,
                         showConfirmButton: false,
                     });
+
+                    window.location.href = response.redirect;
                 }
                 else if(response.status == 1 && edit != "true"){
                     Swal.fire({
@@ -36,14 +39,16 @@ $(document).ready(function(){
                         showCancelButton: false,
                         showConfirmButton: false,
                     });
+
+                    $('.submit-form')[0].reset();
                 }
 
                 // check for reload
-                if(response.reload && response.reload == 1){
-                    setTimeout(function (){
-                        location.reload();
-                    }, 1500);
-                }
+                // if(response.reload && response.reload == 1){
+                //     setTimeout(function (){
+                //         location.reload();
+                //     }, 1500);
+                // }
 
             },
             error: function (errors) {

@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content=" Smart Movies website">
     <meta name="keywords" content=" Smart Movies ">
-    <meta name="csrf-token" content="V2G8zLS7dL5HzdfwxaBDewvJvAKCyeThQE4NBtJv">
+    <meta name="csrf-token" id="token" content="{{ csrf_token() }}" />
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     
     @include('web.layouts.styles')

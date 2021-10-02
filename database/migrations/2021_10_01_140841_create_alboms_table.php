@@ -20,7 +20,7 @@ class CreateAlbomsTable extends Migration
             $table->string('main_image');
             $table->float('price_before');
             $table->float('price_after');
-            $table->enum('type', ['public', 'provate']);
+            $table->enum('type', ['public', 'private']);
 
             $table->unsignedBigInteger('user_id')->index()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\HomeController;
-use App\Http\Controllers\Web\AlbomController;
+use App\Http\Controllers\Web\WebHomeController;
 use App\Http\Controllers\Web\ProfileController;
 
 /*
@@ -19,7 +19,7 @@ use App\Http\Controllers\Web\ProfileController;
 */
 
 /** 
- * Admin auth routes 
+ * Auth routes 
  * */
 Route::middleware('guest')->group(function(){
 
@@ -34,7 +34,7 @@ Route::middleware('guest')->group(function(){
 /**
  * Admin routes
  */
-Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function(){
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->namespace('Admin')->group(function(){
     
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -48,15 +48,19 @@ Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function(){
  */
 Route::name('web.')->namespace('Web')->group(function(){
 
-    Route::get('/', [AlbomController::class, 'index'])->name('home');
+    Route::get('/', [WebHomeController::class, 'index'])->name('home');
 
-    Route::middleware('auth')->group(function(){
+    // Route::middleware(['auth', 'role:user'])->group(function(){
 
         Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
         Route::get('profile', [ProfileController::class, 'index'])->name('profile');
         Route::put('profile', [ProfileController::class, 'updateProfile'])->name('update-profile');
-    });
+
+        Route::resource('alboms', AlbomController::class);
+
+        Route::resource('images', ImageController::class)->only(['destroy']);
+    // });
 });
 
 /**

@@ -40,14 +40,12 @@ class RegisterController extends Controller
             $user->assignRole('user');
 
             $response['status'] = 1;
-            $response['empty_inputs'] = ['email', 'password'];
             $response['redirect'] = route('web.home');;
             $response['reload'] = 1;
             return $response;
         }
 
         $response['status'] = 0;
-        $response['empty_inputs'] = ['email', 'password'];
         $response['redirect'] = route('get-register-form');
         $response['reload'] = 0;    
         return $response;

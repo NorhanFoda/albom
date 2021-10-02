@@ -37,7 +37,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{ route('web.home') }}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">About Us</a>
@@ -52,11 +52,21 @@
                     <a class="nav-link" href="#">Contact Us</a>
                 </li>
 
-                @auth
+                @if(auth()->check() && auth()->user()->hasRole('user'))
+                    <li>
+                        <a class="nav-link" href="{{ route('web.alboms.index') }}">Alboms</a>
+                    </li>
+
                     <li>
                         <a class="nav-link" href="{{ route('web.profile') }}">Profile</a>
                     </li>
-                @endauth
+                @endif
+
+                @if(auth()->check() && auth()->user()->hasRole('admin'))
+                    <li>
+                        <a class="nav-link" href="{{ route('admin.home') }}">Dashboard</a>
+                    </li>
+                @endif
                 
                 @guest
                     <li class="nav-item">

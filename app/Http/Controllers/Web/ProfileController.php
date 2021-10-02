@@ -17,6 +17,8 @@ class ProfileController extends Controller
     public function __construct(UserRepositoryInterface $userRepository){
 
         $this->userRepository = $userRepository;
+
+        $this->middleware(['auth', 'role:user']);
     }
 
 
@@ -39,7 +41,6 @@ class ProfileController extends Controller
         if($updated){
 
             $response['status'] = 1;
-            $response['empty_inputs'] = ['name', 'email', 'password', 'passowrd_confirmation'];
             $response['reload'] = 0;
             $response['redirect'] = route('web.profile');
             return $response;
@@ -48,7 +49,6 @@ class ProfileController extends Controller
         else{
             
             $response['status'] = 0;
-            $response['empty_inputs'] = ['name', 'email', 'password', 'passowrd_confirmation'];
             $response['reload'] = 0;
             $response['redirect'] = route('web.profile');
             return $response;

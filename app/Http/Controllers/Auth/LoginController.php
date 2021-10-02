@@ -18,6 +18,8 @@ class LoginController extends Controller
     public function __construct(UserRepositoryInterface $userRepository){
 
         $this->userRepository = $userRepository;
+
+        $this->middleware(['auth'])->only('logout');
     }
 
     public function getLoginFrom(){
@@ -44,17 +46,14 @@ class LoginController extends Controller
             }
 
             $response['status'] = 1;
-            $response['empty_inputs'] = ['email', 'password'];
             $response['redirect'] = $redirect;
             $response['reload'] = 1;
             return $response;
 
         }
 
-        $redirect = route('get-login-form');
         $response['status'] = 0;
-        $response['empty_inputs'] = ['email', 'password'];
-        $response['redirect'] = $redirect;
+        $response['redirect'] = route('get-login-form');
         $response['reload'] = 0;    
         return $response;
 
