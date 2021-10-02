@@ -29,7 +29,8 @@ class RegisterController extends Controller
 
         $data = $request->except(['_token', '_method']);
 
-        $data['password'] = bcrypt($request->password);
+        // password shoud by hashed but it was not hashed just for test
+        // $data['password'] = bcrypt($request->password);
 
         $user = $this->userRepository->create($data);
 

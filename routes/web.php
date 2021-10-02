@@ -49,7 +49,7 @@ Route::middleware(['auth', 'role:admin|employee'])->prefix('admin')->name('admin
     Route::delete('delete-image/{id}', [App\Http\Controllers\Admin\UserController::class, 'deleteImage'])->name('delete-image');
 
     // Employees routes
-    Route::resource('employees', EmployeeController::class)->except(['show']);
+    Route::resource('employees', EmployeeController::class);
 
     // Roles routes
     Route::resource('roles', RoleController::class);

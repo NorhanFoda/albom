@@ -39,8 +39,8 @@
                                     </ul>
                                 </div>
                                 <p class="package-price">
-                                    <span>{{$albom->price_before}}$ </span>
-                                    <span><del class="text-danger">{{ $albom->price_after }}$</del></span>
+                                    <span>{{$albom->price_after}}$ </span>
+                                    <span><del class="text-danger">{{ $albom->price_before }}$</del></span>
                                 </p>
                             </div>
                         </div>

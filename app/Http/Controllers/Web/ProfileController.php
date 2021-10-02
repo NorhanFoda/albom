@@ -31,10 +31,11 @@ class ProfileController extends Controller
 
         $data = $request->except(['_token', '_method', 'edit', 'password_confirmation']);
 
-        if($request->has('password') && $request->password != null){
+        // password shoud by hashed but it was not hashed just for test
+        // if($request->has('password') && $request->password != null){
 
-            $data['password'] = bcrypt($request->password);
-        }
+        //     $data['password'] = bcrypt($request->password);
+        // }
 
         $updated = $this->userRepository->update($data, auth()->user()->id);
 

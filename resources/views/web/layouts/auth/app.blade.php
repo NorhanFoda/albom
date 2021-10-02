@@ -20,11 +20,8 @@
 <body>
 
     <div class="body_wrapper">
-        <div class="preloader">
-            <div class="preloader-loading">
-                <img src="{{ asset('web/images/logo-m.png') }}" data-src="{{ asset('web/images/logo-m.png') }}" class="lazyload">
-            </div>
-        </div>
+        
+        @yield('loading')
 
         @include('web.layouts.auth.navbar')
        <div class="logo text-center">

@@ -7,7 +7,7 @@
     <section class="check_demo_movie">
         <div class="container">
             <h2 class=" wow fadeInDown">{{ $data['albom']->title }}</h2>
-            @if(auth()->check() && auth()->user()->hasRole('user') && $image->albom->user_id == auth()->user()->id)
+            @if(auth()->check() && auth()->user()->hasRole('user') && $data['albom']->user_id == auth()->user()->id)
                 <p><a href="{{ route('web.alboms.edit', $data['albom']->id) }}"><i class="fa fa-plus"></i>Edit albom</a></p>
             @endif
             <div class="row">

@@ -66,7 +66,6 @@ class EmployeeController extends Controller
      */
     public function store(EmployeeRequest $request)
     {
-        dd('aa');
         $data = $request->except(['_token', '_method', 'roles']);
 
         // password shoud by hashed but it was not hashed just for test
@@ -77,8 +76,8 @@ class EmployeeController extends Controller
 
         if($emp){
 
-            $emp->assignRole('employee');
             $emp->syncRoles($request->roles);
+            $emp->assignRole('employee');
 
             $response['status'] = 1;
             $response['reload'] = 0;
@@ -104,7 +103,13 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        //
+        $data['roles'] = $this->roleRepository->getWhere([['name', '!=', 'admin'], ['name', '!=', 'user'], ['name', '!=', 'employee']]);
+
+        $data['emp'] = $this->userRepository->findWith($id, ['roles']);
+
+        return view('admin.emps.show')->with([
+            'data' => $data
+        ]);
     }
 
     /**
@@ -167,6 +172,14 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $emp = $this->userRepository->findWith($id, ['roles']);
+
+        $emp->roles()->detach();
+
+        $this->userRepository->delete($id);
+
+        return response()->json([
+            'data' => 1
+        ], 200);
     }
 }

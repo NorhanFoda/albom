@@ -37,6 +37,7 @@ class RoleSeeder extends Seeder
         $permissionRepository->create(['name' => 'list roles']);
         $permissionRepository->create(['name' => 'create roles']);
         $permissionRepository->create(['name' => 'edit roles']);
+        $permissionRepository->create(['name' => 'show roles']);
         $permissionRepository->create(['name' => 'delete roles']);
 
         $roles_management->givePermissionTo(['list roles', 'edit roles', 'create roles', 'delete roles']);
@@ -45,6 +46,7 @@ class RoleSeeder extends Seeder
         $permissionRepository->create(['name' => 'list employees']);
         $permissionRepository->create(['name' => 'create employees']);
         $permissionRepository->create(['name' => 'edit employees']);
+        $permissionRepository->create(['name' => 'show employees']);
         $permissionRepository->create(['name' => 'delete employees']);
 
         $emps_management->givePermissionTo(['list employees', 'edit employees', 'create employees', 'delete employees']);

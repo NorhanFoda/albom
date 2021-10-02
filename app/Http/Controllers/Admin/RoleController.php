@@ -159,6 +159,14 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $role = $this->roleRepository->findWith($id, ['permissions']);
+
+        $role->revokePermissionTo($role->permissions);
+
+        $this->roleRepository->delete($id);
+
+        return response()->json([
+            'data' => 1
+        ], 200);
     }
 }
